@@ -4,19 +4,38 @@ Firmware repository for Specfive tracking devices powered by Heltec development 
 
 ## 📦 Supported Products
 
+<table>
+<tr>
+<td width="50%" align="center">
+
 ### Specfive MiniTrekker
+
 ![Specfive MiniTrekker](specfive_mini_trekker.png)
 
 Compact GPS tracking device designed for personal and asset tracking applications.
 
-**Firmware File:** `firmware_heltec_wireless_v3_1.bin`
+**Development Board:** Heltec Wireless Stick V3.1
+
+**Firmware:**  
+[`firmware_heltec_wireless_v3_1.bin`](firmware_heltec_wireless_v3_1.bin)
+
+</td>
+<td width="50%" align="center">
 
 ### Specfive Trekker Bravo
+
 ![Specfive Trekker Bravo](specfive_trekker_bravo.png)
 
 Advanced GPS tracking device with extended range and enhanced features for professional tracking solutions.
 
-**Firmware File:** `firmware_heltec_tracker_v1_2.bin`
+**Development Board:** Heltec Tracker V1.2
+
+**Firmware:**  
+[`firmware_heltec_tracker_v1_2.bin`](firmware_heltec_tracker_v1_2.bin)
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -62,10 +81,8 @@ This firmware supports the following Heltec development boards:
 
 | Product | Development Board | Firmware File |
 |---------|-------------------|---------------|
-| **Specfive MiniTrekker** | Heltec Wireless Stick V3.1 | `firmware_heltec_wireless_v3_1.bin` |
-| **Specfive Trekker Bravo** | Heltec Tracker V1.2 | `firmware_heltec_tracker_v1_2.bin` |
-
-> **Note:** Product images are displayed above in the [Supported Products](#-supported-products) section.
+| **Specfive MiniTrekker** | Heltec Wireless Stick V3.1 | [`firmware_heltec_wireless_v3_1.bin`](firmware_heltec_wireless_v3_1.bin) |
+| **Specfive Trekker Bravo** | Heltec Tracker V1.2 | [`firmware_heltec_tracker_v1_2.bin`](firmware_heltec_tracker_v1_2.bin) |
 
 ---
 
@@ -172,11 +189,6 @@ After the flashing process completes:
 
 ---
 
-## 📄 License
-
-[Add your license information here]
-
----
 
 ## 🤝 Support
 
