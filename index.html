@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HyperMesh Firmware - Firmware repository for Specfive tracking devices powered by Heltec development boards">
+    <title>HyperMesh Firmware - Specfive Tracking Devices</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --bg-color: #ffffff;
+            --bg-light: #f9fafb;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        nav {
+            background-color: var(--bg-color);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        section {
+            background-color: var(--bg-color);
+            margin: 2rem 0;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        h4 {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .product-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .firmware-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: var(--shadow);
+        }
+
+        .firmware-link:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .board-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .board-card {
+            background-color: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .board-card h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .board-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .board-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .board-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tbody tr:hover {
+            background-color: var(--bg-light);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .table-link:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            padding: 1rem;
+            margin: 1rem 0;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .troubleshooting {
+            background-color: #fef3c7;
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .troubleshooting h4 {
+            color: var(--warning-color);
+            margin-top: 0;
+        }
+
+        .troubleshooting ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .resources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .resource-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .resource-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        code {
+            background-color: var(--bg-light);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🔌 HyperMesh Firmware</h1>
+            <p>Firmware repository for Specfive tracking devices powered by Heltec development boards</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#boards">Development Boards</a></li>
+                <li><a href="#flashing">Flashing Guide</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="products">
+            <h2>📦 Supported Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <h3>Specfive MiniTrekker</h3>
+                    <img src="specfive_mini_trekker.png" alt="Specfive MiniTrekker">
+                    <p>Compact GPS tracking device designed for personal and asset tracking applications.</p>
+                    <p><strong>Development Board:</strong> Heltec Wireless Stick V3.1</p>
+                    <a href="firmware_heltec_wireless_v3_1.bin" class="firmware-link" download>
+                        📥 Download Firmware
+                    </a>
+                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-light);">
+                        <code>firmware_heltec_wireless_v3_1.bin</code>
+                    </p>
+                </div>
+
+                <div class="product-card">
+                    <h3>Specfive Trekker Bravo</h3>
+                    <img src="specfive_trekker_bravo.png" alt="Specfive Trekker Bravo">
+                    <p>Advanced GPS tracking device with extended range and enhanced features for professional tracking solutions.</p>
+                    <p><strong>Development Board:</strong> Heltec Tracker V1.2</p>
+                    <a href="firmware_heltec_tracker_v1_2.bin" class="firmware-link" download>
+                        📥 Download Firmware
+                    </a>
+                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-light);">
+                        <code>firmware_heltec_tracker_v1_2.bin</code>
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">📋 Firmware Mapping</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Development Board</th>
+                        <th>Firmware File</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Specfive MiniTrekker</strong></td>
+                        <td>Heltec Wireless Stick V3.1</td>
+                        <td><a href="firmware_heltec_wireless_v3_1.bin" class="table-link" download>firmware_heltec_wireless_v3_1.bin</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Specfive Trekker Bravo</strong></td>
+                        <td>Heltec Tracker V1.2</td>
+                        <td><a href="firmware_heltec_tracker_v1_2.bin" class="table-link" download>firmware_heltec_tracker_v1_2.bin</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="boards">
+            <h2>🔌 Supported Development Boards</h2>
+            <p>This firmware supports the following Heltec development boards:</p>
+
+            <div class="board-specs">
+                <div class="board-card">
+                    <h4>Heltec Wireless Stick V3.1</h4>
+                    <p><strong>Used in:</strong> Specfive MiniTrekker</p>
+                    <p><strong>Key Features:</strong></p>
+                    <ul>
+                        <li>ESP32-S3FN8 dual-core microcontroller (up to 240MHz)</li>
+                        <li>Semtech SX1262 LoRa transceiver</li>
+                        <li>WiFi 802.11 b/g/n and Bluetooth 5.0</li>
+                        <li>0.96-inch OLED display (128x64)</li>
+                        <li>USB Type-C interface</li>
+                        <li>Dedicated 2.4GHz antenna for WiFi/Bluetooth</li>
+                        <li>U.FL/IPEX connector for LoRa antenna</li>
+                        <li>Integrated 3.7V lithium battery interface</li>
+                        <li>Dimensions: 58.08 × 22.6 × 8.2 mm</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Firmware:</strong> <code>firmware_heltec_wireless_v3_1.bin</code></p>
+                </div>
+
+                <div class="board-card">
+                    <h4>Heltec Tracker V1.2</h4>
+                    <p><strong>Used in:</strong> Specfive Trekker Bravo</p>
+                    <p><strong>Key Features:</strong></p>
+                    <ul>
+                        <li>ESP32-S3FN8 dual-core microcontroller (up to 240MHz)</li>
+                        <li>Semtech SX1262 LoRa transceiver</li>
+                        <li>UC6580 GNSS module (GPS, GLONASS, BDS, Galileo, NAVIC, QZSS)</li>
+                        <li>0.96-inch LCD display (160×80 pixels)</li>
+                        <li>WiFi 802.11 b/g/n and Bluetooth 5.0</li>
+                        <li>USB Type-C interface</li>
+                        <li>Integrated lithium battery management</li>
+                        <li>2.4GHz metal spring antenna</li>
+                        <li>Built-in GPS antenna</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Firmware:</strong> <code>firmware_heltec_tracker_v1_2.bin</code></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="flashing">
+            <h2>🚀 Flashing the Firmware</h2>
+
+            <h3>Prerequisites</h3>
+            <p>Before flashing, ensure you have:</p>
+            <ul>
+                <li>A compatible Specfive device (MiniTrekker or Trekker Bravo)</li>
+                <li>USB cable for connecting the device to your computer</li>
+                <li>Appropriate USB drivers installed</li>
+            </ul>
+
+            <h3>Download the Firmware</h3>
+            <ol>
+                <li>Navigate to the <a href="https://github.com" class="table-link">Releases</a> page or download directly from this repository</li>
+                <li>Select the appropriate firmware file for your device:
+                    <ul>
+                        <li><strong>MiniTrekker</strong> → <code>firmware_heltec_wireless_v3_1.bin</code></li>
+                        <li><strong>Trekker Bravo</strong> → <code>firmware_heltec_tracker_v1_2.bin</code></li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Required Tools</h3>
+            <p>You will need the <strong>ESP32 Flash Download Tool</strong> to flash the firmware onto your device.</p>
+            <p>
+                <a href="https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32s3/production_stage/tools/flash_download_tool.html" 
+                   class="resource-link" target="_blank" rel="noopener noreferrer">
+                    🔗 Download ESP32 Flash Download Tool
+                </a>
+            </p>
+
+            <h3>Step-by-Step Flashing Instructions</h3>
+            <ol class="steps">
+                <li>
+                    <strong>Connect Your Device</strong><br>
+                    Connect your <strong>Specfive MiniTrekker</strong> or <strong>Specfive Trekker Bravo</strong> to your computer via a USB cable.
+                </li>
+                <li>
+                    <strong>Open Flash Tool</strong><br>
+                    Launch the <strong>ESP32 Flash Download Tool</strong> on your computer.
+                </li>
+                <li>
+                    <strong>Select COM Port</strong><br>
+                    Choose the <strong>COM port</strong> (Windows) or <strong>Serial port</strong> (macOS/Linux) where your device is connected.
+                </li>
+                <li>
+                    <strong>Configure Flash Settings</strong><br>
+                    <ul>
+                        <li><strong>Flash Address:</strong> <code>0x0000</code> (default)</li>
+                        <li><strong>Flash Size:</strong> Select appropriate size for your board</li>
+                        <li><strong>Flash Speed:</strong> <code>40MHz</code> (recommended)</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Load Firmware</strong><br>
+                    Click <strong>Browse</strong> or <strong>Add</strong> button and navigate to select the downloaded firmware file:
+                    <ul>
+                        <li><code>firmware_heltec_wireless_v3_1.bin</code> for MiniTrekker</li>
+                        <li><code>firmware_heltec_tracker_v1_2.bin</code> for Trekker Bravo</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Start Flashing</strong><br>
+                    Click <strong>Start</strong> to begin uploading the firmware to your device. Wait for the flashing process to complete (progress bar will show status). You should see a "Finish" message when successful.
+                </li>
+                <li>
+                    <strong>Reboot Device</strong><br>
+                    After the flashing process completes:
+                    <ol>
+                        <li>Disconnect the USB cable</li>
+                        <li>Power cycle the device (turn off and on)</li>
+                        <li>The device should now be running the new firmware</li>
+                    </ol>
+                </li>
+            </ol>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>🔧 Troubleshooting</h2>
+
+            <div class="troubleshooting">
+                <h4>Device Not Detected</h4>
+                <ul>
+                    <li>Ensure the correct <strong>USB drivers</strong> for your device are installed</li>
+                    <li>Try a different <strong>USB cable</strong> (data-capable cable required)</li>
+                    <li>Try a different <strong>USB port</strong> on your computer</li>
+                    <li>Check Device Manager (Windows) or System Information (macOS) for COM port detection</li>
+                </ul>
+            </div>
+
+            <div class="troubleshooting">
+                <h4>Flashing Fails to Start</h4>
+                <ul>
+                    <li><strong>Press and hold the BOOT button</strong> on your Heltec device during the flashing process</li>
+                    <li>Ensure the device is in <strong>download mode</strong> before starting</li>
+                    <li>Check that the correct COM port is selected</li>
+                    <li>Verify the firmware file is not corrupted (re-download if necessary)</li>
+                </ul>
+            </div>
+
+            <div class="troubleshooting">
+                <h4>Flashing Process Interrupted</h4>
+                <ul>
+                    <li>Do not disconnect the device during flashing</li>
+                    <li>Ensure stable USB connection</li>
+                    <li>Close other applications that might be using the serial port</li>
+                    <li>Retry the flashing process</li>
+                </ul>
+            </div>
+
+            <div class="troubleshooting">
+                <h4>Device Not Responding After Flash</h4>
+                <ul>
+                    <li>Perform a factory reset if available</li>
+                    <li>Verify the correct firmware file was flashed for your device model</li>
+                    <li>Check device power supply and battery status</li>
+                    <li>Contact support if issues persist</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="resources">
+            <h2>📚 Additional Resources</h2>
+            <div class="resources">
+                <a href="https://heltec.org/project/wireless-stick-v3/" 
+                   class="resource-link" target="_blank" rel="noopener noreferrer">
+                    Heltec Wireless Stick V3.1 Documentation
+                </a>
+                <a href="https://heltec.org/project/tracker-v1/" 
+                   class="resource-link" target="_blank" rel="noopener noreferrer">
+                    Heltec Tracker V1.2 Documentation
+                </a>
+                <a href="https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_en.pdf" 
+                   class="resource-link" target="_blank" rel="noopener noreferrer">
+                    ESP32-S3 Technical Reference
+                </a>
+            </div>
+
+            <h3 style="margin-top: 2rem;">📝 Notes</h3>
+            <ul>
+                <li>Always ensure you're flashing the correct firmware file for your specific device model</li>
+                <li>Keep a backup of your current firmware before upgrading</li>
+                <li>Firmware updates may reset device configuration to defaults</li>
+                <li>For production devices, follow your organization's firmware update procedures</li>
+            </ul>
+        </section>
+
+        <section id="support">
+            <h2>🤝 Support</h2>
+            <p>For firmware-related issues or questions:</p>
+            <ul>
+                <li>Open an issue in this repository</li>
+                <li>Contact Specfive support team</li>
+                <li>Refer to the troubleshooting section above</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HyperMesh Firmware. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">Last Updated: January 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active state to navigation
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
