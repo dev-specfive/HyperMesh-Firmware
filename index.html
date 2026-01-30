@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="HyperMesh Firmware - Firmware repository for Specfive tracking devices powered by Heltec development boards">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0f0f0f">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>HyperMesh Firmware - Specfive Tracking Devices</title>
@@ -33,25 +33,31 @@
         }
 
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #3b82f6;
-            --text-color: #1f2937;
-            --text-light: #6b7280;
-            --bg-color: #ffffff;
-            --bg-light: #f9fafb;
-            --border-color: #e5e7eb;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            /* HyperMesh logo theme: dark + electric green */
+            --primary-color: #00ff88;
+            --primary-hover: #33ff99;
+            --secondary-color: #00cc6a;
+            --accent-color: #22ff7f;
+            --text-color: #e8e8e8;
+            --text-muted: #9ca3af;
+            --text-dark: #1f2937;
+            --bg-color: #1a1a1a;
+            --bg-light: #252525;
+            --bg-dark: #0f0f0f;
+            --border-color: #2d2d2d;
+            --border-glow: rgba(0, 255, 136, 0.4);
+            --success-color: #00ff88;
+            --warning-color: #ffb74d;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.4), 0 4px 10px -2px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 20px rgba(0, 255, 136, 0.15);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--bg-light);
+            background-color: #121212;
         }
 
         .container {
@@ -70,11 +76,12 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
+            background: var(--bg-dark);
+            color: var(--text-color);
             padding: 3rem 0;
             text-align: center;
             box-shadow: var(--shadow-lg);
+            border-bottom: 2px solid var(--border-glow);
         }
 
         .header-logo {
@@ -93,17 +100,18 @@
 
         header p {
             font-size: 1.2rem;
-            opacity: 0.95;
+            color: var(--text-muted);
         }
 
         nav {
-            background-color: var(--bg-color);
+            background-color: var(--bg-dark);
             padding: 1rem 0;
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 100;
             max-width: 100%;
+            border-bottom: 1px solid var(--border-color);
         }
 
         nav .container {
@@ -129,7 +137,7 @@
         }
 
         nav a {
-            color: var(--text-color);
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
@@ -141,7 +149,8 @@
             text-align: center;
         }
 
-        nav a:hover {
+        nav a:hover,
+        nav a.active {
             color: var(--primary-color);
         }
 
@@ -179,7 +188,7 @@
             display: block;
             width: 22px;
             height: 2px;
-            background: var(--text-color);
+            background: var(--primary-color);
             border-radius: 1px;
             transition: transform 0.25s ease, opacity 0.2s ease;
         }
@@ -225,6 +234,7 @@
             box-shadow: var(--shadow);
             max-width: 100%;
             min-width: 0;
+            border: 1px solid var(--border-color);
         }
 
         h2 {
@@ -232,11 +242,11 @@
             font-size: 2rem;
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--primary-color);
+            border-bottom: 2px solid var(--border-glow);
         }
 
         h3 {
-            color: var(--secondary-color);
+            color: var(--primary-hover);
             font-size: 1.5rem;
             margin: 1.5rem 0 1rem;
         }
@@ -256,12 +266,12 @@
         }
 
         .product-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            background: var(--bg-light);
             border: 2px solid var(--border-color);
             border-radius: 12px;
             padding: 2rem;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
             box-shadow: var(--shadow);
             min-width: 0;
             overflow: hidden;
@@ -269,7 +279,7 @@
 
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
             border-color: var(--primary-color);
         }
 
@@ -277,10 +287,9 @@
             max-width: 100%;
             width: 100%;
             height: auto;
-            border-radius: 8px;
             margin-bottom: 1rem;
-            box-shadow: var(--shadow);
             display: block;
+            background: transparent;
         }
 
         .product-card h3 {
@@ -288,10 +297,14 @@
             margin-bottom: 1rem;
         }
 
+        .product-card p {
+            color: var(--text-muted);
+        }
+
         .firmware-link {
             display: inline-block;
             background-color: var(--primary-color);
-            color: white;
+            color: #0f0f0f;
             padding: 0.875rem 1.75rem;
             min-height: 48px;
             min-width: 48px;
@@ -300,14 +313,15 @@
             text-decoration: none;
             font-weight: 600;
             margin-top: 1rem;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
             box-shadow: var(--shadow);
             text-align: center;
         }
 
         .firmware-link:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--primary-hover);
             transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
         }
 
         .firmware-link:active {
@@ -331,6 +345,11 @@
         .board-card h4 {
             color: var(--primary-color);
             margin-top: 0;
+        }
+
+        .board-card p,
+        .board-card li {
+            color: var(--text-muted);
         }
 
         .board-card ul {
@@ -380,14 +399,16 @@
         }
 
         thead {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: var(--bg-dark);
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-glow);
         }
 
         th, td {
             padding: 0.75rem 1rem;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
         }
 
         tbody tr:hover {
@@ -406,7 +427,7 @@
         }
 
         .table-link:hover {
-            color: var(--secondary-color);
+            color: var(--primary-hover);
             text-decoration: underline;
         }
 
@@ -425,6 +446,7 @@
             border-left: 4px solid var(--primary-color);
             position: relative;
             padding-left: 3.5rem;
+            color: var(--text-color);
         }
 
         .steps li:before {
@@ -433,7 +455,7 @@
             left: 1rem;
             top: 1rem;
             background-color: var(--primary-color);
-            color: white;
+            color: var(--bg-dark);
             width: 2rem;
             height: 2rem;
             border-radius: 50%;
@@ -444,7 +466,7 @@
         }
 
         .troubleshooting {
-            background-color: #fef3c7;
+            background-color: rgba(255, 183, 77, 0.1);
             border-left: 4px solid var(--warning-color);
             padding: 1rem;
             margin: 1rem 0;
@@ -459,6 +481,7 @@
         .troubleshooting ul {
             margin-left: 1.5rem;
             margin-top: 0.5rem;
+            color: var(--text-muted);
         }
 
         .resources {
@@ -481,23 +504,25 @@
 
         .resource-link:hover {
             background-color: var(--primary-color);
-            color: white;
+            color: var(--bg-dark);
             border-color: var(--primary-color);
+            box-shadow: var(--shadow-glow);
         }
 
         footer {
-            background-color: var(--text-color);
-            color: white;
+            background-color: var(--bg-dark);
+            color: var(--text-muted);
             text-align: center;
             padding: 2rem 0;
             margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
         }
 
         .badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
             background-color: var(--primary-color);
-            color: white;
+            color: var(--bg-dark);
             border-radius: 20px;
             font-size: 0.875rem;
             font-weight: 600;
@@ -505,7 +530,7 @@
         }
 
         code {
-            background-color: var(--bg-light);
+            background-color: var(--bg-dark);
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
@@ -513,6 +538,16 @@
             font-size: 0.9em;
             word-break: break-word;
             overflow-wrap: break-word;
+            border: 1px solid var(--border-color);
+        }
+
+        p, li {
+            color: var(--text-color);
+        }
+
+        section ul:not(.board-card ul):not(.troubleshooting ul),
+        section ol {
+            color: var(--text-muted);
         }
 
         .resource-link {
@@ -908,7 +943,7 @@
                     <a href="firmware_heltec_wireless_v3_1.bin" class="firmware-link" download>
                         📥 Download Firmware
                     </a>
-                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-light);">
+                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">
                         <code>firmware_heltec_wireless_v3_1.bin</code>
                     </p>
                 </div>
@@ -921,7 +956,7 @@
                     <a href="firmware_heltec_tracker_v1_2.bin" class="firmware-link" download>
                         📥 Download Firmware
                     </a>
-                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-light);">
+                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">
                         <code>firmware_heltec_tracker_v1_2.bin</code>
                     </p>
                 </div>
