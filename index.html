@@ -523,6 +523,27 @@
             justify-content: center;
         }
 
+        .reference-image-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .reference-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .reference-image-caption {
+            margin-top: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
         /* Tablet and below */
         @media (max-width: 992px) {
             header {
@@ -963,7 +984,7 @@
                     <p><strong>Used in:</strong> Specfive MiniTrekker</p>
                     <p><strong>Key Features:</strong></p>
                     <ul>
-                        <li>ESP32-S3FN8 dual-core microcontroller (up to 240MHz)</li>
+                        <li>ESP32-S3 dual-core microcontroller (up to 240MHz)</li>
                         <li>Semtech SX1262 LoRa transceiver</li>
                         <li>WiFi 802.11 b/g/n and Bluetooth 5.0</li>
                         <li>0.96-inch OLED display (128x64)</li>
@@ -981,7 +1002,7 @@
                     <p><strong>Used in:</strong> Specfive Trekker Bravo</p>
                     <p><strong>Key Features:</strong></p>
                     <ul>
-                        <li>ESP32-S3FN8 dual-core microcontroller (up to 240MHz)</li>
+                        <li>ESP32-S3 dual-core microcontroller (up to 240MHz)</li>
                         <li>Semtech SX1262 LoRa transceiver</li>
                         <li>UC6580 GNSS module (GPS, GLONASS, BDS, Galileo, NAVIC, QZSS)</li>
                         <li>0.96-inch LCD display (160×80 pixels)</li>
@@ -1028,6 +1049,16 @@
             </p>
 
             <h3>Step-by-Step Flashing Instructions</h3>
+            
+            <div class="reference-image-container">
+                <img src="FirmwareUplaodingImageSuccessReference.png" 
+                     alt="ESP32-S3 Flash Download Tool Reference" 
+                     class="reference-image">
+                <p class="reference-image-caption">
+                    Reference: ESP32-S3 Flash Download Tool V3.9.9_R2 - Successful flash completion
+                </p>
+            </div>
+
             <ol class="steps">
                 <li>
                     <strong>Connect Your Device</strong><br>
@@ -1035,18 +1066,21 @@
                 </li>
                 <li>
                     <strong>Open Flash Tool</strong><br>
-                    Launch the <strong>ESP32 Flash Download Tool</strong> on your computer.
+                    Launch the <strong>ESP32-S3 Flash Download Tool</strong> on your computer. Select <strong>ESP32-S3</strong> as the hardware type.
                 </li>
                 <li>
                     <strong>Select COM Port</strong><br>
-                    Choose the <strong>COM port</strong> (Windows) or <strong>Serial port</strong> (macOS/Linux) where your device is connected.
+                    Choose the <strong>COM port</strong> (Windows) or <strong>Serial port</strong> (macOS/Linux) where your device is connected. The tool will automatically detect the port.
                 </li>
                 <li>
                     <strong>Configure Flash Settings</strong><br>
+                    Set the following parameters:
                     <ul>
-                        <li><strong>Flash Address:</strong> <code>0x0000</code> (default)</li>
-                        <li><strong>Flash Size:</strong> Select appropriate size for your board</li>
-                        <li><strong>Flash Speed:</strong> <code>40MHz</code> (recommended)</li>
+                        <li><strong>Flash Address:</strong> <code>0x000</code></li>
+                        <li><strong>Hardware:</strong> <code>ESP32-S3</code></li>
+                        <li><strong>SPI Speed:</strong> <code>40MHz</code> (recommended)</li>
+                        <li><strong>SPI Mode:</strong> <code>DIO</code> (default)</li>
+                        <li><strong>Baud Rate:</strong> <code>921600</code> (or lower if experiencing issues)</li>
                     </ul>
                 </li>
                 <li>
@@ -1056,10 +1090,11 @@
                         <li><code>firmware_heltec_wireless_v3_1.bin</code> for MiniTrekker</li>
                         <li><code>firmware_heltec_tracker_v1_2.bin</code> for Trekker Bravo</li>
                     </ul>
+                    Ensure the checkbox next to the firmware file is checked, and verify the flash address shows <code>0x000</code>.
                 </li>
                 <li>
                     <strong>Start Flashing</strong><br>
-                    Click <strong>Start</strong> to begin uploading the firmware to your device. Wait for the flashing process to complete (progress bar will show status). You should see a "Finish" message when successful.
+                    Click <strong>START</strong> to begin uploading the firmware to your device. Wait for the flashing process to complete (progress bar will show status). You should see a <strong>"FINISH"</strong> message (完成) when successful, as shown in the reference image above.
                 </li>
                 <li>
                     <strong>Reboot Device</strong><br>
