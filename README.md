@@ -120,6 +120,10 @@ Launch the **ESP32 Flash Download Tool** on your computer.
 #### 3. Select COM Port
 Choose the **COM port** (Windows) or **Serial port** (macOS/Linux) where your device is connected.
 
+**Finding your COM port (Windows):** Open **Device Manager** → expand **Ports (COM & LPT)** → look for **USB Serial Device** (or CH340/CP210x depending on your board). The number in parentheses (e.g., COM39) is the port to select.
+
+![Finding COM port for Heltec device](com_port_finding.png)
+
 #### 4. Configure Flash Settings
 - **Flash Address:** `0x0000` (default)
 - **Flash Size:** Select appropriate size for your board

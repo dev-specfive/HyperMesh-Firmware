@@ -1071,6 +1071,15 @@
                 <li>
                     <strong>Select COM Port</strong><br>
                     Choose the <strong>COM port</strong> (Windows) or <strong>Serial port</strong> (macOS/Linux) where your device is connected. The tool will automatically detect the port.
+                    <p style="margin-top: 1rem;">To find your connected Heltec device's COM port on Windows, open <strong>Device Manager</strong> → expand <strong>Ports (COM &amp; LPT)</strong> → look for <strong>USB Serial Device</strong> (or CH340/CP210x depending on your board). The number in parentheses (e.g., COM39) is the port to select.</p>
+                    <div class="reference-image-container" style="margin-top: 1rem;">
+                        <img src="com_port_finding.png" 
+                             alt="Windows Device Manager - Finding COM port for Heltec device" 
+                             class="reference-image">
+                        <p class="reference-image-caption">
+                            Reference: Finding your Heltec device's COM port in Windows Device Manager (Ports → USB Serial Device)
+                        </p>
+                    </div>
                 </li>
                 <li>
                     <strong>Configure Flash Settings</strong><br>
