@@ -108,9 +108,11 @@ You will need the **ESP32 Flash Download Tool** to flash the firmware onto your 
 🔗 **Download ESP32 Flash Download Tool:**  
 https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32s3/production_stage/tools/flash_download_tool.html
 
-### Entering Download Mode (Specfive Trekker Bravo)
+### Enter Download Mode
 
-If you have a **Specfive Trekker Bravo** (Heltec Tracker V1.2), you must put the device in download mode before the flash tool can connect:
+#### Specfive Trekker Bravo
+
+You must put the device in download mode before the flash tool can connect:
 
 1. Connect the device to your computer via USB cable
 2. **Press and hold the USER button**
@@ -119,6 +121,10 @@ If you have a **Specfive Trekker Bravo** (Heltec Tracker V1.2), you must put the
 5. The device is now in download mode and ready for firmware flashing
 
 Perform this sequence right before clicking START in the flash tool. If flashing fails to begin, repeat the steps and try again.
+
+#### Specfive Mini Trekker
+
+Typically enters download mode automatically when the flash tool connects; no button press required.
 
 ### Step-by-Step Flashing Instructions
 
