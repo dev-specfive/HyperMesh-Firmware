@@ -1,6 +1,6 @@
 # HyperMesh Firmware
 
-Firmware repository for Specfive tracking devices powered by Heltec development boards.
+Firmware repository for LoRa-based communications devices supported by SpecFive's HyperMesh protocol.
 
 ## 📦 Supported Products
 
