@@ -194,6 +194,17 @@ After the flashing process completes:
 
 ---
 
+## ⚠️ Known Issues (App)
+
+We are aware of the following issues in our companion app and are working on fixes for the next release:
+
+- **Messages screen sync:** The Messages screen might not sync (however, notifications of new messages will still appear). *Workaround:* Kill/clear the app from RAM and start it again.
+- **Group messages UI:** On leaving a group, the message UI may appear shrunk.
+
+We are working on these issues and you can expect fixes in our next release soon.
+
+---
+
 ## 📚 Additional Resources
 
 - [Heltec Wireless Stick V3.1 Documentation](https://heltec.org/project/wireless-stick-v3/)
@@ -218,6 +229,8 @@ For firmware-related issues or questions:
 - Open an issue in this repository
 - Contact Specfive support team
 - Refer to the troubleshooting section above
+
+For issue reporting, you can mail us at: [teamhypermesh@specfive.com](mailto:teamhypermesh@specfive.com)
 
 ---
 
