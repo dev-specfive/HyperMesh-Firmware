@@ -93,14 +93,13 @@ This firmware supports the following Heltec development boards:
 Before flashing, ensure you have:
 - A compatible Specfive device (MiniTrekker or Trekker Bravo)
 - USB cable for connecting the device to your computer
-- Appropriate USB drivers installed
+- Appropriate USB drivers installed (e.g. CP210x & CH340)
 
 ### Download the Firmware
 
-1. Navigate to the [Releases](../../releases) page or download directly from this repository
-2. Select the appropriate firmware file for your device:
-   - **MiniTrekker** → `firmware_heltec_wireless_v3_1.bin`
-   - **Trekker Bravo** → `firmware_heltec_tracker_v1_2.bin`
+Select the appropriate firmware file for your device:
+- **MiniTrekker** → [firmware_heltec_wireless_v3_1.bin](firmware_heltec_wireless_v3_1.bin)
+- **Trekker Bravo** → [firmware_heltec_tracker_v1_2.bin](firmware_heltec_tracker_v1_2.bin)
 
 ### Required Tools
 
