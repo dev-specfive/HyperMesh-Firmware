@@ -8,9 +8,9 @@ Firmware repository for LoRa-based communications devices supported by SpecFive'
 <tr>
 <td width="50%" align="center">
 
-### Specfive MiniTrekker
+### SpecFive MiniTrekker
 
-![Specfive MiniTrekker](specfive_mini_trekker.png)
+![SpecFive MiniTrekker](specfive_mini_trekker.png)
 
 Your ultimate companion for on-the-go communication in remote areas or outdoor adventures. Compact LoRa HyperMesh device with durable PETG construction—small but robust, ideal for off-grid mesh messaging. Compatible with HyperMesh and ATAK apps.
 
@@ -22,9 +22,9 @@ Your ultimate companion for on-the-go communication in remote areas or outdoor a
 </td>
 <td width="50%" align="center">
 
-### Specfive Trekker Bravo
+### SpecFive Trekker Bravo
 
-![Specfive Trekker Bravo](specfive_trekker_bravo.png)
+![SpecFive Trekker Bravo](specfive_trekker_bravo.png)
 
 HyperMesh-enabled LoRa radio designed for hikers and preppers. Features long-range mesh messaging, GPS integration, and weather-resistant design.
 
@@ -44,7 +44,7 @@ HyperMesh-enabled LoRa radio designed for hikers and preppers. Features long-ran
 This firmware supports the following Heltec development boards:
 
 ### Heltec Wireless Stick V3.1
-**Used in:** Specfive MiniTrekker
+**Used in:** SpecFive MiniTrekker
 
 **Key Features:**
 - ESP32-S3FN8 dual-core microcontroller (up to 240MHz)
@@ -60,7 +60,7 @@ This firmware supports the following Heltec development boards:
 **Firmware File:** `firmware_heltec_wireless_v3_1.bin`
 
 ### Heltec Tracker V1.2
-**Used in:** Specfive Trekker Bravo
+**Used in:** SpecFive Trekker Bravo
 
 **Key Features:**
 - ESP32-S3FN8 dual-core microcontroller (up to 240MHz)
@@ -81,8 +81,8 @@ This firmware supports the following Heltec development boards:
 
 | Product | Development Board | Firmware File |
 |---------|-------------------|---------------|
-| **Specfive MiniTrekker** | Heltec Wireless Stick V3.1 | [`firmware_heltec_wireless_v3_1.bin`](firmware_heltec_wireless_v3_1.bin) |
-| **Specfive Trekker Bravo** | Heltec Tracker V1.2 | [`firmware_heltec_tracker_v1_2.bin`](firmware_heltec_tracker_v1_2.bin) |
+| **SpecFive MiniTrekker** | Heltec Wireless Stick V3.1 | [`firmware_heltec_wireless_v3_1.bin`](firmware_heltec_wireless_v3_1.bin) |
+| **SpecFive Trekker Bravo** | Heltec Tracker V1.2 | [`firmware_heltec_tracker_v1_2.bin`](firmware_heltec_tracker_v1_2.bin) |
 
 ---
 
@@ -91,7 +91,7 @@ This firmware supports the following Heltec development boards:
 ### Prerequisites
 
 Before flashing, ensure you have:
-- A compatible Specfive device (MiniTrekker or Trekker Bravo)
+- A compatible SpecFive device (MiniTrekker or Trekker Bravo)
 - USB cable for connecting the device to your computer
 - Appropriate USB drivers installed (e.g. CP210x & CH340)
 
@@ -110,7 +110,7 @@ https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32s3/production_
 
 ### Enter Download Mode
 
-#### Specfive Trekker Bravo
+#### SpecFive Trekker Bravo
 
 You must put the device in download mode before the flash tool can connect:
 
@@ -122,14 +122,14 @@ You must put the device in download mode before the flash tool can connect:
 
 Perform this sequence right before clicking START in the flash tool. If flashing fails to begin, repeat the steps and try again.
 
-#### Specfive Mini Trekker
+#### SpecFive Mini Trekker
 
 Typically enters download mode automatically when the flash tool connects; no button press required.
 
 ### Step-by-Step Flashing Instructions
 
 #### 1. Connect Your Device
-Connect your **Specfive MiniTrekker** or **Specfive Trekker Bravo** to your computer via a USB cable.
+Connect your **SpecFive MiniTrekker** or **SpecFive Trekker Bravo** to your computer via a USB cable.
 
 #### 2. Open Flash Tool
 Launch the **ESP32 Flash Download Tool** on your computer.
@@ -227,7 +227,7 @@ We are working on these issues and you can expect fixes in our next release soon
 
 For firmware-related issues or questions:
 - Open an issue in this repository
-- Contact Specfive support team
+- Contact SpecFive support team
 - Refer to the troubleshooting section above
 
 For issue reporting, you can mail us at: [teamhypermesh@specfive.com](mailto:teamhypermesh@specfive.com)
