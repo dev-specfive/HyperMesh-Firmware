@@ -12,7 +12,7 @@ Firmware repository for LoRa-based communications devices supported by SpecFive'
 
 ![Specfive MiniTrekker](specfive_mini_trekker.png)
 
-Compact GPS tracking device designed for personal and asset tracking applications.
+Your ultimate companion for on-the-go communication in remote areas or outdoor adventures. Compact LoRa HyperMesh device with durable PETG construction—small but robust, ideal for off-grid mesh messaging. Compatible with HyperMesh and ATAK apps.
 
 **Development Board:** Heltec Wireless Stick V3.1
 
@@ -26,7 +26,7 @@ Compact GPS tracking device designed for personal and asset tracking application
 
 ![Specfive Trekker Bravo](specfive_trekker_bravo.png)
 
-Advanced GPS tracking device with extended range and enhanced features for professional tracking solutions.
+HyperMesh-enabled LoRa radio designed for hikers and preppers. Features long-range mesh messaging, GPS integration, and weather-resistant design.
 
 **Development Board:** Heltec Tracker V1.2
 
