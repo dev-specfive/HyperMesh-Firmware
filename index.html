@@ -1048,6 +1048,17 @@
                 </a>
             </p>
 
+            <h3>Entering Download Mode (Specfive Trekker Bravo)</h3>
+            <p>If you have a <strong>Specfive Trekker Bravo</strong> (Heltec Tracker V1.2), you must put the device in download mode before the flash tool can connect. Follow these steps:</p>
+            <ol style="margin: 1rem 0; padding-left: 1.5rem;">
+                <li>Connect the device to your computer via USB cable</li>
+                <li><strong>Press and hold the USER button</strong></li>
+                <li>While holding USER, <strong>press the RST (reset) button once</strong></li>
+                <li><strong>Release the USER button</strong></li>
+                <li>The device is now in download mode and ready for firmware flashing</li>
+            </ol>
+            <p style="margin-top: 0.5rem; color: var(--text-light); font-size: 0.9rem;">Perform this sequence right before clicking START in the flash tool. If flashing fails to begin, repeat the steps and try again.</p>
+
             <h3>Step-by-Step Flashing Instructions</h3>
             
             <div class="reference-image-container">
@@ -1133,7 +1144,8 @@
             <div class="troubleshooting">
                 <h4>Flashing Fails to Start</h4>
                 <ul>
-                    <li><strong>Press and hold the BOOT button</strong> on your Heltec device during the flashing process</li>
+                    <li><strong>Trekker Bravo:</strong> Put device in download mode — hold <strong>USER</strong>, press <strong>RST</strong> once, then release USER. Repeat before clicking START if needed.</li>
+                    <li><strong>MiniTrekker:</strong> Typically enters download mode automatically when the flash tool connects; no button press required.</li>
                     <li>Ensure the device is in <strong>download mode</strong> before starting</li>
                     <li>Check that the correct COM port is selected</li>
                     <li>Verify the firmware file is not corrupted (re-download if necessary)</li>
