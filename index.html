@@ -33,25 +33,29 @@
         }
 
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #3b82f6;
-            --text-color: #1f2937;
-            --text-light: #6b7280;
-            --bg-color: #ffffff;
-            --bg-light: #f9fafb;
-            --border-color: #e5e7eb;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --primary-color: #00e98a;
+            --secondary-color: #00c977;
+            --accent-color: #40ffb0;
+            --text-color: #e7edf4;
+            --text-light: #a8b4c3;
+            --bg-color: #111821;
+            --bg-light: #1a2430;
+            --border-color: #2a3544;
+            --success-color: #00e98a;
+            --warning-color: #f6b04f;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.45);
+            --surface-gradient: linear-gradient(165deg, #162230 0%, #101821 100%);
+            --card-gradient: linear-gradient(160deg, #1b2734 0%, #131c26 100%);
+            --accent-gradient: linear-gradient(135deg, #00e98a 0%, #00c977 100%);
+            --accent-gradient-soft: linear-gradient(135deg, rgba(0, 233, 138, 0.16) 0%, rgba(64, 255, 176, 0.08) 100%);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--bg-light);
+            background: linear-gradient(180deg, #0b1118 0%, #131c26 100%);
         }
 
         .container {
@@ -70,40 +74,73 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: linear-gradient(180deg, #0d1117 0%, #111a24 100%);
             color: white;
-            padding: 3rem 0;
+            padding: 2rem 0 1.4rem;
             text-align: center;
             box-shadow: var(--shadow-lg);
+            border-bottom: 1px solid rgba(0, 233, 138, 0.18);
         }
 
-        .header-logo {
+        .header-inner {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 0.9rem;
+            text-align: left;
+        }
+
+        .specfive-logo {
             display: block;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1rem;
+            width: 170px;
+            height: auto;
             object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.08));
+        }
+
+        .header-content {
+            width: 100%;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .hypermesh-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 0 10px rgba(0, 233, 138, 0.2);
         }
 
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+            font-size: 1.95rem;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            color: #f5f9ff;
         }
 
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.95;
+        .header-subtitle {
+            max-width: 760px;
+            margin: 0;
+            font-size: 0.92rem;
+            color: rgba(212, 220, 230, 0.85);
         }
 
         nav {
-            background-color: var(--bg-color);
+            background: linear-gradient(180deg, #121b25 0%, #0f1721 100%);
             padding: 1rem 0;
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 100;
             max-width: 100%;
+            border-bottom: 1px solid rgba(0, 233, 138, 0.16);
         }
 
         nav .container {
@@ -218,13 +255,14 @@
         }
 
         section {
-            background-color: var(--bg-color);
+            background: var(--surface-gradient);
             margin: 2rem 0;
             padding: 2.5rem;
             border-radius: 12px;
             box-shadow: var(--shadow);
             max-width: 100%;
             min-width: 0;
+            border: 1px solid rgba(64, 255, 176, 0.12);
         }
 
         h2 {
@@ -256,7 +294,7 @@
         }
 
         .product-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            background: var(--card-gradient);
             border: 2px solid var(--border-color);
             border-radius: 12px;
             padding: 2rem;
@@ -288,10 +326,14 @@
             margin-bottom: 1rem;
         }
 
+        .product-card p {
+            color: var(--text-color);
+        }
+
         .firmware-link {
             display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
+            background: var(--accent-gradient);
+            color: #0d1117;
             padding: 0.875rem 1.75rem;
             min-height: 48px;
             min-width: 48px;
@@ -306,8 +348,9 @@
         }
 
         .firmware-link:hover {
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, #2dffb0 0%, #00de83 100%);
             transform: scale(1.05);
+            color: #0d1117;
         }
 
         .firmware-link:active {
@@ -322,10 +365,11 @@
         }
 
         .board-card {
-            background-color: var(--bg-light);
+            background: linear-gradient(160deg, #1b2734 0%, #16202c 100%);
             padding: 1.5rem;
             border-radius: 8px;
             border-left: 4px solid var(--primary-color);
+            border: 1px solid rgba(64, 255, 176, 0.1);
         }
 
         .board-card h4 {
@@ -444,7 +488,7 @@
         }
 
         .troubleshooting {
-            background-color: #fef3c7;
+            background-color: rgba(246, 176, 79, 0.12);
             border-left: 4px solid var(--warning-color);
             padding: 1rem;
             margin: 1rem 0;
@@ -459,6 +503,7 @@
         .troubleshooting ul {
             margin-left: 1.5rem;
             margin-top: 0.5rem;
+            color: var(--text-light);
         }
 
         .resources {
@@ -471,7 +516,7 @@
         .resource-link {
             display: inline-block;
             padding: 0.75rem 1.5rem;
-            background-color: var(--bg-light);
+            background: var(--accent-gradient-soft);
             color: var(--primary-color);
             text-decoration: none;
             border-radius: 8px;
@@ -481,23 +526,24 @@
 
         .resource-link:hover {
             background-color: var(--primary-color);
-            color: white;
+            color: #0d1117;
             border-color: var(--primary-color);
         }
 
         footer {
-            background-color: var(--text-color);
-            color: white;
+            background-color: #0d1117;
+            color: var(--text-light);
             text-align: center;
             padding: 2rem 0;
             margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
         }
 
         .badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
             background-color: var(--primary-color);
-            color: white;
+            color: #0d1117;
             border-radius: 20px;
             font-size: 0.875rem;
             font-weight: 600;
@@ -513,6 +559,13 @@
             font-size: 0.9em;
             word-break: break-word;
             overflow-wrap: break-word;
+        }
+
+        p,
+        li,
+        td,
+        th {
+            color: var(--text-color);
         }
 
         .resource-link {
@@ -547,21 +600,19 @@
         /* Tablet and below */
         @media (max-width: 992px) {
             header {
-                padding: 2rem 0;
+                padding: 1.55rem 0 1.2rem;
             }
 
-            .header-logo {
-                width: 64px;
-                height: 64px;
-                margin-bottom: 0.75rem;
+            .specfive-logo {
+                width: 145px;
             }
 
             header h1 {
-                font-size: 2rem;
+                font-size: 1.7rem;
             }
 
-            header p {
-                font-size: 1.1rem;
+            .header-subtitle {
+                font-size: 0.88rem;
             }
 
             section {
@@ -594,7 +645,7 @@
             }
 
             header {
-                padding: 1.75rem 0.5rem;
+                padding: 1.2rem 0.5rem 1rem;
             }
 
             header .container {
@@ -602,20 +653,35 @@
                 padding-right: 1rem;
             }
 
-            .header-logo {
-                width: 56px;
-                height: 56px;
-                margin-bottom: 0.5rem;
+            .header-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 0.8rem;
+            }
+
+            .specfive-logo {
+                width: 130px;
+                margin: 0 auto;
+            }
+
+            .header-brand {
+                justify-content: center;
+                margin-bottom: 0.35rem;
+            }
+
+            .hypermesh-logo {
+                width: 34px;
+                height: 34px;
             }
 
             header h1 {
-                font-size: 1.65rem;
+                font-size: 1.45rem;
                 line-height: 1.3;
                 word-wrap: break-word;
             }
 
-            header p {
-                font-size: 1rem;
+            .header-subtitle {
+                font-size: 0.84rem;
                 padding: 0 0.25rem;
                 line-height: 1.5;
             }
@@ -779,19 +845,22 @@
                 padding: 0 0.75rem;
             }
 
-            .header-logo {
-                width: 48px;
-                height: 48px;
-                margin-bottom: 0.5rem;
+            .specfive-logo {
+                width: 115px;
             }
 
             header h1 {
-                font-size: 1.35rem;
+                font-size: 1.2rem;
                 line-height: 1.3;
             }
 
-            header p {
-                font-size: 0.9rem;
+            .hypermesh-logo {
+                width: 30px;
+                height: 30px;
+            }
+
+            .header-subtitle {
+                font-size: 0.78rem;
             }
 
             section {
@@ -894,9 +963,18 @@
 <body>
     <header>
         <div class="container">
-            <img src="HyperMeshLogo.png" alt="HyperMesh" class="header-logo" width="80" height="80">
-            <h1>HyperMesh Firmware</h1>
-            <p>Firmware repository for LoRa-based communications devices supported by SpecFive's HyperMesh protocol</p>
+            <div class="header-inner">
+                <img src="specfivelogo.png" alt="SpecFive" class="specfive-logo" width="220">
+                <div class="header-content">
+                    <div class="header-brand">
+                        <img src="HyperMeshLogo.png" alt="HyperMesh" class="hypermesh-logo" width="52" height="52">
+                        <div>
+                            <h1>HyperMesh Firmware Portal</h1>
+                        </div>
+                    </div>
+                    <p class="header-subtitle">Firmware downloads and flashing guidance for the Spec5 HyperMesh ecosystem.</p>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -908,67 +986,95 @@
                 <span class="icon-bar" aria-hidden="true"></span>
             </button>
             <ul id="nav-menu">
-                <li><a href="#products">Products</a></li>
+                <li><a href="#about">What is HyperMesh</a></li>
+                <li><a href="#products">Spec5 Products</a></li>
                 <li><a href="#boards">Development Boards</a></li>
-                <li><a href="#flashing">Flashing Guide</a></li>
+                <li><a href="#apps">App Download</a></li>
+                <li><a href="#firmware">Firmware Downloads</a></li>
+                <li><a href="#flashing">Flashing Instructions</a></li>
+                <li><a href="#notes">Notes</a></li>
                 <li><a href="#troubleshooting">Troubleshooting</a></li>
-                <li><a href="#known-issues">Known Issues</a></li>
-                <li><a href="#resources">Resources</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
+        <section id="about">
+            <h2>🛰️ What is HyperMesh</h2>
+            <p>HyperMesh is Spec5's LoRa mesh communication firmware and app ecosystem for off-grid messaging and field connectivity.</p>
+            <p>It runs on supported ESP32-S3 + LoRa development boards and is compatible with Spec5 hardware as well as selected third-party hardware platforms.</p>
+        </section>
+
         <section id="products">
-            <h2>📦 Supported Products</h2>
+            <h2>📦 Supported Spec5 Products</h2>
             <div class="products-grid">
                 <div class="product-card">
                     <h3>SpecFive MiniTrekker</h3>
                     <img src="specfive_mini_trekker.png" alt="SpecFive MiniTrekker">
-                    <p>Your ultimate companion for on-the-go communication in remote areas or outdoor adventures. Compact LoRa HyperMesh device with durable PETG construction—small but robust, ideal for off-grid mesh messaging. Compatible with HyperMesh and ATAK apps.</p>
-                    <p><strong>Development Board:</strong> Heltec Wireless Stick V3.1</p>
-                    <a href="firmware_heltec_wireless_v3_1.bin" class="firmware-link" download>
+                    <p>Compact LoRa HyperMesh field device for off-grid messaging and operations.</p>
+                    <p><strong>Development Board:</strong> Heltec Tracker V1.2</p>
+                    <a href="firmware_heltec_tracker_v1_2.bin" class="firmware-link" download>
                         📥 Download Firmware
                     </a>
-                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-light);">
-                        <code>firmware_heltec_wireless_v3_1.bin</code>
+                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">
+                        <code>firmware_heltec_tracker_v1_2.bin</code>
                     </p>
                 </div>
 
                 <div class="product-card">
                     <h3>SpecFive Trekker Bravo</h3>
                     <img src="specfive_trekker_bravo.png" alt="SpecFive Trekker Bravo">
-                    <p>HyperMesh-enabled LoRa radio designed for hikers and preppers. Features long-range mesh messaging, GPS integration, and weather-resistant design.</p>
+                    <p>HyperMesh-enabled LoRa radio for long-range mesh messaging with GPS-ready field deployment.</p>
                     <p><strong>Development Board:</strong> Heltec Tracker V1.2</p>
                     <a href="firmware_heltec_tracker_v1_2.bin" class="firmware-link" download>
                         📥 Download Firmware
                     </a>
-                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-light);">
+                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">
                         <code>firmware_heltec_tracker_v1_2.bin</code>
+                    </p>
+                </div>
+
+                <div class="product-card">
+                    <h3>Spec5 Spectre</h3>
+                    <img src="specfive_spectre.png" alt="Spec5 Spectre">
+                    <p>Spectre -  Android phone with LoRa mesh radio.</p>
+                    <p>LoRa radio uses Heltec LoRa32 V3 (Heltec V3).</p>
+                    <p>Compatible with HyperMesh firmware and Android app.</p>
+                    <p><strong>Development Board:</strong> Heltec LoRa32 V3</p>
+                    <a href="https://dev-specfive.github.io/HyperMesh-Firmware/firmware_heltec_wireless_v3_1.bin" class="firmware-link" target="_blank" rel="noopener noreferrer">
+                        📥 Download Firmware
+                    </a>
+                    <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">
+                        <code>firmware_heltec_wireless_v3_1.bin</code>
                     </p>
                 </div>
             </div>
 
-            <h3 style="margin-top: 2rem;">📋 Firmware Mapping</h3>
+            <p style="margin-top: 1.5rem; color: var(--text-muted);">
+                Spec5 product names are provided for compatibility reference. Firmware downloads are organized by development board.
+            </p>
+
+            <h3 style="margin-top: 2rem;">📋 Product Compatibility Reference</h3>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Development Board</th>
-                            <th>Firmware File</th>
+                            <th>Spec5 Product</th>
+                            <th>Board Platform</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>SpecFive MiniTrekker</strong></td>
-                            <td>Heltec Wireless Stick V3.1</td>
-                            <td><a href="firmware_heltec_wireless_v3_1.bin" class="table-link" download>firmware_heltec_wireless_v3_1.bin</a></td>
+                            <td>Heltec Tracker V1.2</td>
                         </tr>
                         <tr>
                             <td><strong>SpecFive Trekker Bravo</strong></td>
                             <td>Heltec Tracker V1.2</td>
-                            <td><a href="firmware_heltec_tracker_v1_2.bin" class="table-link" download>firmware_heltec_tracker_v1_2.bin</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Spec5 Spectre</strong></td>
+                            <td>Heltec LoRa32 V3</td>
                         </tr>
                     </tbody>
                 </table>
@@ -977,67 +1083,110 @@
 
         <section id="boards">
             <h2>🔌 Supported Development Boards</h2>
-            <p>This firmware supports the following Heltec development boards:</p>
+            <p>This section is board-focused for firmware selection. Product names are intentionally not mixed into the board list.</p>
 
             <div class="board-specs">
                 <div class="board-card">
-                    <h4>Heltec Wireless Stick V3.1</h4>
-                    <p><strong>Used in:</strong> SpecFive MiniTrekker</p>
-                    <p><strong>Key Features:</strong></p>
-                    <ul>
-                        <li>ESP32-S3 dual-core microcontroller (up to 240MHz)</li>
-                        <li>Semtech SX1262 LoRa transceiver</li>
-                        <li>WiFi 802.11 b/g/n and Bluetooth 5.0</li>
-                        <li>0.96-inch OLED display (128x64)</li>
-                        <li>USB Type-C interface</li>
-                        <li>Dedicated 2.4GHz antenna for WiFi/Bluetooth</li>
-                        <li>U.FL/IPEX connector for LoRa antenna</li>
-                        <li>Integrated 3.7V lithium battery interface</li>
-                        <li>Dimensions: 58.08 × 22.6 × 8.2 mm</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Firmware:</strong> <code>firmware_heltec_wireless_v3_1.bin</code></p>
-                </div>
-
-                <div class="board-card">
                     <h4>Heltec Tracker V1.2</h4>
-                    <p><strong>Used in:</strong> SpecFive Trekker Bravo</p>
                     <p><strong>Key Features:</strong></p>
                     <ul>
                         <li>ESP32-S3 dual-core microcontroller (up to 240MHz)</li>
                         <li>Semtech SX1262 LoRa transceiver</li>
                         <li>UC6580 GNSS module (GPS, GLONASS, BDS, Galileo, NAVIC, QZSS)</li>
-                        <li>0.96-inch LCD display (160×80 pixels)</li>
-                        <li>WiFi 802.11 b/g/n and Bluetooth 5.0</li>
+                        <li>0.96-inch LCD display (160x80 pixels)</li>
                         <li>USB Type-C interface</li>
-                        <li>Integrated lithium battery management</li>
-                        <li>2.4GHz metal spring antenna</li>
-                        <li>Built-in GPS antenna</li>
+                        <li>Integrated battery management</li>
                     </ul>
                     <p style="margin-top: 1rem;"><strong>Firmware:</strong> <code>firmware_heltec_tracker_v1_2.bin</code></p>
+                </div>
+
+                <div class="board-card">
+                    <h4>Heltec Wireless Stick V3.1</h4>
+                    <p><strong>Key Features:</strong></p>
+                    <ul>
+                        <li>ESP32-S3 dual-core microcontroller (up to 240MHz)</li>
+                        <li>Semtech SX1262 LoRa transceiver</li>
+                        <li>0.96-inch OLED display (128x64)</li>
+                        <li>WiFi 802.11 b/g/n and Bluetooth 5.0</li>
+                        <li>USB Type-C interface</li>
+                        <li>Compact stick form factor</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Firmware:</strong> <code>firmware_heltec_wireless_v3_1.bin</code></p>
+                </div>
+
+                <div class="board-card">
+                    <h4>Heltec LoRa32 V3</h4>
+                    <p><strong>Key Features:</strong></p>
+                    <ul>
+                        <li>ESP32-S3 dual-core microcontroller (up to 240MHz)</li>
+                        <li>SX1262 LoRa transceiver</li>
+                        <li>0.96-inch OLED display</li>
+                        <li>USB Type-C interface</li>
+                        <li>Widely used Heltec V3 hardware platform</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Firmware:</strong> <code>firmware_heltec_wireless_v3_1.bin</code></p>
                 </div>
             </div>
         </section>
 
+        <section id="apps">
+            <h2>📱 App Download</h2>
+            <p>Use the companion apps below after flashing supported hardware.</p>
+            <div class="resources">
+                <a href="https://play.google.com/store/apps/details?id=com.specfive.hypermesh" 
+                   class="resource-link" target="_blank" rel="noopener noreferrer">
+                    HyperMesh Android App (Google Play)
+                </a>
+            </div>
+        </section>
+
+        <section id="firmware">
+            <h2>💾 Firmware Downloads (Board-Based)</h2>
+            <p>Firmware downloads are organized by development board, so they can be used on Spec5 and non-Spec5 hardware built on the same board platform.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Development Board</th>
+                            <th>Firmware Download</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Heltec Tracker V1.2</strong></td>
+                            <td><a href="firmware_heltec_tracker_v1_2.bin" class="table-link" download>firmware_heltec_tracker_v1_2.bin</a></td>
+                            <td>Use for Mini Trekker and Trekker Bravo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Heltec Wireless Stick V3.1</strong></td>
+                            <td><a href="firmware_heltec_wireless_v3_1.bin" class="table-link" download>firmware_heltec_wireless_v3_1.bin</a></td>
+                            <td>Use for compatible Wireless Stick V3.1 builds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Heltec LoRa32 V3</strong></td>
+                            <td><a href="https://dev-specfive.github.io/HyperMesh-Firmware/firmware_heltec_wireless_v3_1.bin" class="table-link" target="_blank" rel="noopener noreferrer">firmware_heltec_wireless_v3_1.bin</a></td>
+                            <td>Use for Spectre-compatible Heltec V3 hardware</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
         <section id="flashing">
-            <h2>🚀 Flashing the Firmware</h2>
+            <h2>🚀 Flashing Instructions (Board-Based)</h2>
 
             <h3>Prerequisites</h3>
             <p>Before flashing, ensure you have:</p>
             <ul>
-                <li>A compatible SpecFive device (MiniTrekker or Trekker Bravo)</li>
-                <li>USB cable for connecting the device to your computer</li>
-                <li>Appropriate USB drivers installed (e.g. CP210x &amp; CH340)</li>
-            </ul>
-
-            <h3>Download the Firmware</h3>
-            <p>Select the appropriate firmware file for your device:</p>
-            <ul>
-                <li><strong>MiniTrekker</strong> → <a href="firmware_heltec_wireless_v3_1.bin" class="table-link" download>firmware_heltec_wireless_v3_1.bin</a></li>
-                <li><strong>Trekker Bravo</strong> → <a href="firmware_heltec_tracker_v1_2.bin" class="table-link" download>firmware_heltec_tracker_v1_2.bin</a></li>
+                <li>One supported development board</li>
+                <li>USB cable for connecting the board to your computer</li>
+                <li>Appropriate USB drivers installed (for example, CP210x or CH340)</li>
+                <li>The correct board-specific firmware file from the board-based download table above</li>
             </ul>
 
             <h3>Required Tools</h3>
-            <p>You will need the <strong>ESP32 Flash Download Tool</strong> to flash the firmware onto your device.</p>
+            <p>You will need the <strong>ESP32 Flash Download Tool</strong> to flash firmware to ESP32-S3 based boards.</p>
             <p>
                 <a href="https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32s3/production_stage/tools/flash_download_tool.html" 
                    class="resource-link" target="_blank" rel="noopener noreferrer">
@@ -1046,18 +1195,11 @@
             </p>
 
             <h3>Enter Download Mode</h3>
-            <h4>SpecFive Trekker Bravo</h4>
-            <p>You must put the device in download mode before the flash tool can connect. Follow these steps:</p>
-            <ol style="margin: 1rem 0; padding-left: 1.5rem;">
-                <li>Connect the device to your computer via USB cable</li>
-                <li><strong>Press and hold the USER button</strong></li>
-                <li>While holding USER, <strong>press the RST (reset) button once</strong></li>
-                <li><strong>Release the USER button</strong></li>
-                <li>The device is now in download mode and ready for firmware flashing</li>
-            </ol>
-            <p style="margin-top: 0.5rem; color: var(--text-light); font-size: 0.9rem;">Perform this sequence right before clicking START in the flash tool. If flashing fails to begin, repeat the steps and try again.</p>
-            <h4>SpecFive Mini Trekker</h4>
-            <p>Typically enters download mode automatically when the flash tool connects; no button press required.</p>
+            <p>Download-mode behavior can vary by board design:</p>
+            <ul>
+                <li><strong>Heltec Tracker V1.2:</strong> Hold <strong>USER/BOOT</strong>, tap <strong>RST</strong>, then release <strong>USER/BOOT</strong>.</li>
+                <li><strong>Heltec Wireless Stick V3.1 / LoRa32 V3:</strong> Often enters download mode automatically when flashing starts; if not, use the BOOT+RST method above.</li>
+            </ul>
 
             <h3>Step-by-Step Flashing Instructions</h3>
             
@@ -1072,8 +1214,8 @@
 
             <ol class="steps">
                 <li>
-                    <strong>Connect Your Device</strong><br>
-                    Connect your <strong>SpecFive MiniTrekker</strong> or <strong>SpecFive Trekker Bravo</strong> to your computer via a USB cable.
+                    <strong>Connect Board</strong><br>
+                    Connect the supported board to your computer via USB.
                 </li>
                 <li>
                     <strong>Open Flash Tool</strong><br>
@@ -1081,16 +1223,7 @@
                 </li>
                 <li>
                     <strong>Select COM Port</strong><br>
-                    Choose the <strong>COM port</strong> (Windows) or <strong>Serial port</strong> (macOS/Linux) where your device is connected. The tool will automatically detect the port.
-                    <p style="margin-top: 1rem;">To find your connected Heltec device's COM port on Windows, open <strong>Device Manager</strong> → expand <strong>Ports (COM &amp; LPT)</strong> → look for <strong>USB Serial Device</strong> (or CH340/CP210x depending on your board). The number in parentheses (e.g., COM39) is the port to select.</p>
-                    <div class="reference-image-container" style="margin-top: 1rem;">
-                        <img src="com_port_finding.png" 
-                             alt="Windows Device Manager - Finding COM port for Heltec device" 
-                             class="reference-image">
-                        <p class="reference-image-caption">
-                            Reference: Finding your Heltec device's COM port in Windows Device Manager (Ports → USB Serial Device)
-                        </p>
-                    </div>
+                    Choose the <strong>COM port</strong> (Windows) or <strong>Serial port</strong> (macOS/Linux) where your board is connected.
                 </li>
                 <li>
                     <strong>Configure Flash Settings</strong><br>
@@ -1100,32 +1233,31 @@
                         <li><strong>Hardware:</strong> <code>ESP32-S3</code></li>
                         <li><strong>SPI Speed:</strong> <code>40MHz</code> (recommended)</li>
                         <li><strong>SPI Mode:</strong> <code>DIO</code> (default)</li>
-                        <li><strong>Baud Rate:</strong> <code>921600</code> (or lower if experiencing issues)</li>
                     </ul>
                 </li>
                 <li>
-                    <strong>Load Firmware</strong><br>
-                    Click <strong>Browse</strong> or <strong>Add</strong> button and navigate to select the downloaded firmware file:
-                    <ul>
-                        <li><code>firmware_heltec_wireless_v3_1.bin</code> for MiniTrekker</li>
-                        <li><code>firmware_heltec_tracker_v1_2.bin</code> for Trekker Bravo</li>
-                    </ul>
-                    Ensure the checkbox next to the firmware file is checked, and verify the flash address shows <code>0x000</code>.
+                    <strong>Load Board Firmware</strong><br>
+                    Select the correct board-specific <code>.bin</code> file from the firmware download section.
                 </li>
                 <li>
                     <strong>Start Flashing</strong><br>
                     Click <strong>START</strong> to begin uploading the firmware to your device. Wait for the flashing process to complete (progress bar will show status). You should see a <strong>"FINISH"</strong> message (完成) when successful, as shown in the reference image above.
                 </li>
                 <li>
-                    <strong>Reboot Device</strong><br>
-                    After the flashing process completes:
-                    <ol>
-                        <li>Disconnect the USB cable</li>
-                        <li>Power cycle the device (turn off and on)</li>
-                        <li>The device should now be running the new firmware</li>
-                    </ol>
+                    <strong>Reboot</strong><br>
+                    Reboot the board/device and validate connectivity in the HyperMesh app.
                 </li>
             </ol>
+        </section>
+
+        <section id="notes">
+            <h2>📝 Notes</h2>
+            <ul>
+                <li>Product name = what the user bought.</li>
+                <li>Board name = underlying hardware platform.</li>
+                <li>Firmware file = what gets flashed to the board.</li>
+                <li>Always flash firmware based on board compatibility, not product marketing name.</li>
+            </ul>
         </section>
 
         <section id="troubleshooting">
@@ -1144,11 +1276,11 @@
             <div class="troubleshooting">
                 <h4>Flashing Fails to Start</h4>
                 <ul>
-                    <li><strong>Trekker Bravo:</strong> Put device in download mode — hold <strong>USER</strong>, press <strong>RST</strong> once, then release USER. Repeat before clicking START if needed.</li>
-                    <li><strong>MiniTrekker:</strong> Typically enters download mode automatically when the flash tool connects; no button press required.</li>
-                    <li>Ensure the device is in <strong>download mode</strong> before starting</li>
+                    <li>Put the board in download mode (BOOT+RST sequence).</li>
+                    <li>Confirm board hardware is set to ESP32-S3.</li>
+                    <li>Confirm flash address is set to <code>0x000</code>.</li>
+                    <li>Verify selected firmware matches the board type.</li>
                     <li>Check that the correct COM port is selected</li>
-                    <li>Verify the firmware file is not corrupted (re-download if necessary)</li>
                 </ul>
             </div>
 
@@ -1165,48 +1297,33 @@
             <div class="troubleshooting">
                 <h4>Device Not Responding After Flash</h4>
                 <ul>
-                    <li>Perform a factory reset if available</li>
-                    <li>Verify the correct firmware file was flashed for your device model</li>
-                    <li>Check device power supply and battery status</li>
-                    <li>Contact support if issues persist</li>
+                    <li>Reflash the board using the correct board firmware.</li>
+                    <li>Lower baud rate and retry if flashing was unstable.</li>
+                    <li>Power cycle the device after a successful finish state.</li>
                 </ul>
             </div>
-        </section>
-
-        <section id="known-issues">
-            <h2>⚠️ Known Issues (App)</h2>
-            <p>We are aware of the following issues in our companion app and are working on fixes for the next release:</p>
-            <ul style="margin-top: 1rem;">
-                <li><strong>Messages screen sync:</strong> The Messages screen might not sync (however, notifications of new messages will still appear). <em>Workaround:</em> Kill/clear the app from RAM and start it again.</li>
-                <li><strong>Group messages UI:</strong> On leaving a group, the message UI may appear shrunk.</li>
-            </ul>
-            <p style="margin-top: 1rem; color: var(--text-light);">We are working on these issues and you can expect fixes in our next release soon.</p>
         </section>
 
         <section id="resources">
             <h2>📚 Additional Resources</h2>
             <div class="resources">
+                <a href="https://heltec.org/project/tracker-v1/" 
+                   class="resource-link" target="_blank" rel="noopener noreferrer">
+                    Heltec Tracker V1.2 Documentation
+                </a>
                 <a href="https://heltec.org/project/wireless-stick-v3/" 
                    class="resource-link" target="_blank" rel="noopener noreferrer">
                     Heltec Wireless Stick V3.1 Documentation
                 </a>
-                <a href="https://heltec.org/project/tracker-v1/" 
+                <a href="https://heltec.org/project/wifi-lora-32-v3/" 
                    class="resource-link" target="_blank" rel="noopener noreferrer">
-                    Heltec Tracker V1.2 Documentation
+                    Heltec LoRa32 V3 Documentation
                 </a>
                 <a href="https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_en.pdf" 
                    class="resource-link" target="_blank" rel="noopener noreferrer">
                     ESP32-S3 Technical Reference
                 </a>
             </div>
-
-            <h3 style="margin-top: 2rem;">📝 Notes</h3>
-            <ul>
-                <li>Always ensure you're flashing the correct firmware file for your specific device model</li>
-                <li>Keep a backup of your current firmware before upgrading</li>
-                <li>Firmware updates may reset device configuration to defaults</li>
-                <li>For production devices, follow your organization's firmware update procedures</li>
-            </ul>
         </section>
 
         <section id="support">
@@ -1224,6 +1341,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 SpecFive. All rights reserved.</p>
+            <p style="margin-top: 0.35rem; opacity: 0.92;">Built in USA by SpecFive 🇺🇸</p>
             <p style="margin-top: 0.5rem; opacity: 0.8;">Last Updated: January 2026</p>
         </div>
     </footer>
