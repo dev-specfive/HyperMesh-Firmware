@@ -1,9 +1,12 @@
 /**
  * HyperMesh browser flasher — Web Serial + esptool-js (ESP32-S3).
- * Requires Chromium-based browser and HTTPS (or localhost).
+ * Requires Chromium (Chrome/Edge) and HTTPS or localhost.
+ *
+ * esptool-js is vendored under vendor/ so the flasher works without a CDN
+ * (corporate filters, offline mirrors, strict CSP).
  */
 
-import { ESPLoader, Transport } from 'https://unpkg.com/esptool-js@0.5.7/bundle.js';
+import { ESPLoader, Transport } from './vendor/esptool-js-0.5.7.bundle.js';
 
 const PRESETS = [
   {
@@ -76,13 +79,14 @@ function setProgress(pct) {
   label.textContent = `${n}%`;
 }
 
-async function closePortIfNeeded() {
+async function releasePort() {
   if (!state.port) return;
   try {
     await state.port.close();
   } catch {
-    /* ignore */
+    /* already closed or invalid */
   }
+  state.port = null;
 }
 
 function getFirmwareBytes() {
@@ -100,16 +104,18 @@ function getFirmwareBytes() {
   if (!preset) throw new Error('Select a board / firmware preset.');
   const url = resolveFirmwareUrl(preset.file);
   log(`Downloading firmware: ${url}`);
-  return fetch(url).then((r) => {
-    if (!r.ok) throw new Error(`Firmware download failed (${r.status}).`);
-    return r.arrayBuffer();
-  }).then((buf) => toBinaryString(new Uint8Array(buf)));
+  return fetch(url)
+    .then((r) => {
+      if (!r.ok) throw new Error(`Firmware download failed (${r.status}).`);
+      return r.arrayBuffer();
+    })
+    .then((buf) => toBinaryString(new Uint8Array(buf)));
 }
 
 function makeTerminal() {
   return {
     clean() {
-      /* esptool-js clears loader UI; keep our step log visible */
+      /* ESPLoader calls clean() in constructor; keep on-screen log */
     },
     writeLine(data) {
       log(data);
@@ -125,20 +131,21 @@ async function ensurePort() {
     throw new Error('Web Serial is not available. Use Chrome or Edge over HTTPS (or localhost).');
   }
   if (state.port) return state.port;
-  state.port = await navigator.serial.requestPort({});
-  $('webflasher-port-status').textContent = 'USB serial port selected. Put the board in download mode if needed, then click Flash.';
+  state.port = await navigator.serial.requestPort();
+  $('webflasher-port-status').textContent =
+    'USB serial port selected. Put the board in download mode if needed, then click Flash.';
   return state.port;
 }
 
 async function onChoosePort() {
   if (state.busy) return;
   try {
-    if (state.port) {
-      await closePortIfNeeded();
-      state.port = null;
-      $('webflasher-port-status').textContent = 'Port cleared. Choose again.';
-    }
+    const hadPort = !!state.port;
+    await releasePort();
     clearLog();
+    if (hadPort) {
+      $('webflasher-port-status').textContent = 'Previous port released. Select again in the dialog.';
+    }
     await ensurePort();
   } catch (e) {
     if (e.name === 'NotFoundError') {
@@ -149,29 +156,39 @@ async function onChoosePort() {
   }
 }
 
+async function safeTransportDisconnect(transport) {
+  if (!transport) return;
+  try {
+    await transport.disconnect();
+  } catch {
+    /* ignore */
+  }
+}
+
 async function onFlash() {
   if (state.busy) return;
   const eraseAll = $('webflasher-erase').checked;
   clearLog();
   setProgress(0);
 
+  let transport = null;
   setBusy(true);
   try {
     const port = await ensurePort();
     const firmwareData = await getFirmwareBytes();
-    log(`Firmware image size: ${firmwareData.length} bytes (flash at 0x0, DIO, matches ESP Flash Download Tool guidance).`);
+    log(`Firmware image size: ${firmwareData.length} bytes (flash at 0x0, DIO).`);
 
-    const transport = new Transport(port, true);
-    const terminal = makeTerminal();
+    transport = new Transport(port, false);
     const espLoader = new ESPLoader({
       transport,
       baudrate: 115200,
+      romBaudrate: 115200,
       enableTracing: false,
-      terminal,
+      terminal: makeTerminal(),
     });
 
-    const chip = await espLoader.main();
-    log(`Connected: ${typeof chip === 'string' ? chip : JSON.stringify(chip)}`);
+    const chipDescription = await espLoader.main();
+    log(`Connected: ${chipDescription}`);
 
     setProgress(0);
     await espLoader.writeFlash({
@@ -190,16 +207,12 @@ async function onFlash() {
     await transport.setRTS(true);
     await new Promise((r) => setTimeout(r, 100));
     await transport.setRTS(false);
-    await transport.disconnect();
-    await transport.waitForUnlock(1500);
+    await safeTransportDisconnect(transport);
+    transport = null;
 
-    try {
-      await port.close();
-    } catch {
-      /* ignore */
-    }
-    state.port = null;
-    $('webflasher-port-status').textContent = 'Done. Unplug/replug USB if the device does not boot. You can choose the port again to flash another board.';
+    await releasePort();
+    $('webflasher-port-status').textContent =
+      'Done. Unplug/replug USB if the device does not boot. Choose the port again to flash another board.';
     setProgress(100);
     log('Complete.', 'webflasher-log--ok');
   } catch (e) {
@@ -208,12 +221,8 @@ async function onFlash() {
     } else {
       log(String(e.message || e), 'webflasher-log--err');
     }
-    try {
-      if (state.port) await state.port.close();
-    } catch {
-      /* ignore */
-    }
-    state.port = null;
+    await safeTransportDisconnect(transport);
+    await releasePort();
     $('webflasher-port-status').textContent = 'Select USB port again after fixing the issue above.';
   } finally {
     setBusy(false);
@@ -258,4 +267,8 @@ function init() {
   wirePresetVisibility();
 }
 
-init();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
