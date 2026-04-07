@@ -126,33 +126,57 @@ function makeTerminal() {
   };
 }
 
+/**
+ * Pick a new SerialPort. Must call navigator.serial.requestPort() with no prior await
+ * in the same event turn, or Chromium will not open the chooser (user activation expires).
+ */
+async function requestNewPort() {
+  if (!navigator.serial) {
+    throw new Error('Web Serial is not available. Use Chrome or Edge over HTTPS (or localhost).');
+  }
+  const choosePromise = navigator.serial.requestPort();
+  const port = await choosePromise;
+  state.port = port;
+  $('webflasher-port-status').textContent =
+    'USB serial port selected. Put the board in download mode if needed, then click Flash.';
+  return port;
+}
+
 async function ensurePort() {
   if (!navigator.serial) {
     throw new Error('Web Serial is not available. Use Chrome or Edge over HTTPS (or localhost).');
   }
   if (state.port) return state.port;
-  state.port = await navigator.serial.requestPort();
-  $('webflasher-port-status').textContent =
-    'USB serial port selected. Put the board in download mode if needed, then click Flash.';
-  return state.port;
+  return requestNewPort();
 }
 
 async function onChoosePort() {
   if (state.busy) return;
+  if (!navigator.serial) {
+    $('webflasher-port-status').textContent =
+      'Web Serial is not available here. Use Google Chrome or Microsoft Edge on a desktop or laptop over HTTPS (not Safari/iPhone; mobile browsers generally cannot use USB serial).';
+    log($('webflasher-port-status').textContent, 'webflasher-log--err');
+    return;
+  }
   try {
-    const hadPort = !!state.port;
-    await releasePort();
     clearLog();
-    if (hadPort) {
-      $('webflasher-port-status').textContent = 'Previous port released. Select again in the dialog.';
+    // Drop any previous port without awaiting before requestPort (keeps user activation valid).
+    if (state.port) {
+      const old = state.port;
+      state.port = null;
+      void old.close().catch(() => {});
+      $('webflasher-port-status').textContent = 'Select your device in the browser dialog…';
     }
-    await ensurePort();
+    await requestNewPort();
+    log('Serial port granted. You can click Flash when ready.');
   } catch (e) {
-    if (e.name === 'NotFoundError') {
+    if (e && e.name === 'NotFoundError') {
       log('Port selection cancelled.');
+      $('webflasher-port-status').textContent = 'Selection cancelled. Tap Choose USB serial port to try again.';
       return;
     }
-    log(String(e.message || e), 'webflasher-log--err');
+    log(String((e && e.message) || e), 'webflasher-log--err');
+    $('webflasher-port-status').textContent = 'Could not open the port chooser. See log above.';
   }
 }
 
@@ -258,13 +282,18 @@ function init() {
   if (!navigator.serial) {
     $('webflasher-banner').hidden = false;
     $('webflasher-banner').textContent =
-      'Web Serial API is not available in this browser. Use Google Chrome or Microsoft Edge on desktop, over HTTPS (GitHub Pages works).';
+      'Web Serial API is not available in this browser. Use Google Chrome or Microsoft Edge on a desktop or laptop with HTTPS or localhost (GitHub Pages is fine). Phone/tablet browsers cannot use this USB flasher.';
     $('webflasher-flash').disabled = true;
     $('webflasher-port').disabled = true;
+    $('webflasher-port-status').textContent =
+      'Buttons disabled: this environment has no Web Serial. Open the same page in Chrome or Edge on a computer.';
   }
-  $('webflasher-port').addEventListener('click', () => void onChoosePort());
-  $('webflasher-flash').addEventListener('click', () => void onFlash());
+  const portBtn = $('webflasher-port');
+  const flashBtn = $('webflasher-flash');
+  portBtn.addEventListener('click', () => void onChoosePort());
+  flashBtn.addEventListener('click', () => void onFlash());
   wirePresetVisibility();
+  window.__hypermeshWebFlasherInit = true;
 }
 
 if (document.readyState === 'loading') {

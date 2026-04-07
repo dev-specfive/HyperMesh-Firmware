@@ -1028,6 +1028,8 @@
             margin-top: 0.5rem;
             min-height: 48px;
             transition: transform 0.15s, filter 0.15s;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .webflasher-btn:hover:not(:disabled) {
@@ -1159,9 +1161,40 @@
         #webflasher-log .webflasher-log--raw {
             opacity: 0.85;
         }
+
+        #file-protocol-bar {
+            display: none;
+            background: var(--warning-color);
+            color: #1a1205;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+        }
+
+        #file-protocol-bar code {
+            background: rgba(0, 0, 0, 0.08);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.88em;
+        }
     </style>
 </head>
 <body>
+    <div id="file-protocol-bar" role="alert"></div>
+    <script>
+        (function () {
+            if (location.protocol !== 'file:') return;
+            var bar = document.getElementById('file-protocol-bar');
+            if (!bar) return;
+            bar.style.display = 'block';
+            bar.innerHTML =
+                '<strong>Local file only:</strong> you opened this HTML from disk (<code>file://</code>), not from a website. That blocks the flasher. ' +
+                '<strong>On your real site</strong> (e.g. GitHub Pages), people use an <code>https://…</code> link—the same <code>index.html</code> loads automatically and works. ' +
+                'For testing on your computer, run <code>npx --yes serve .</code> in this folder and open the <code>http://localhost</code> URL it shows.';
+        })();
+    </script>
     <header>
         <div class="container">
             <div class="header-inner">
@@ -1377,7 +1410,7 @@
 
         <section id="web-flasher">
             <h2>⚡ Web Flasher</h2>
-            <p>Flash supported ESP32-S3 boards from the browser—similar to <a href="https://flasher.meshtastic.org/" class="table-link" target="_blank" rel="noopener noreferrer">Meshtastic Web Flasher</a>—using the Web Serial API and <a href="https://github.com/espressif/esptool-js" class="table-link" target="_blank" rel="noopener noreferrer">esptool-js</a>. Use a <strong>data-capable</strong> USB cable and a Chromium-based desktop browser (Chrome or Edge).</p>
+            <p>Flash supported ESP32-S3 boards from the browser—similar to <a href="https://flasher.meshtastic.org/" class="table-link" target="_blank" rel="noopener noreferrer">Meshtastic Web Flasher</a>—using the Web Serial API and <a href="https://github.com/espressif/esptool-js" class="table-link" target="_blank" rel="noopener noreferrer">esptool-js</a>. Use a <strong>data-capable</strong> USB cable and a Chromium-based desktop browser (Chrome or Edge). This page must be served as a real site (<code>https://…</code> or <code>http://localhost</code>), not opened by double-clicking the file on disk.</p>
 
             <div id="webflasher-banner" class="webflasher-banner" hidden></div>
 
@@ -1648,5 +1681,18 @@
         })();
     </script>
     <script type="module" src="web-flasher.js"></script>
+    <script>
+        /* If the ES module fails (404, CSP), buttons never get listeners — explain after full load */
+        window.addEventListener('load', function () {
+            if (window.__hypermeshWebFlasherInit) return;
+            var b = document.getElementById('webflasher-banner');
+            var st = document.getElementById('webflasher-port-status');
+            if (b) {
+                b.hidden = false;
+                b.textContent = 'The flasher script did not load. Ensure web-flasher.js and vendor/esptool-js-0.5.7.bundle.js are deployed next to index.html. Open DevTools (F12) → Console for errors.';
+            }
+            if (st) st.textContent = 'Flasher not loaded — see notice above.';
+        });
+    </script>
 </body>
 </html>
