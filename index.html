@@ -958,6 +958,207 @@
                 transition: none;
             }
         }
+
+        /* —— Web Serial flasher (esptool-js) —— */
+        .webflasher-banner {
+            background: rgba(246, 176, 79, 0.12);
+            border: 1px solid rgba(246, 176, 79, 0.45);
+            color: var(--text-color);
+            padding: 0.9rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .webflasher-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            margin-top: 1.25rem;
+        }
+
+        @media (min-width: 900px) {
+            .webflasher-grid {
+                grid-template-columns: repeat(3, 1fr);
+                align-items: start;
+            }
+        }
+
+        .webflasher-step {
+            background: var(--card-gradient);
+            border: 1px solid rgba(64, 255, 176, 0.14);
+            border-radius: 10px;
+            padding: 1.25rem;
+            min-width: 0;
+        }
+
+        .webflasher-step h3 {
+            margin-top: 0;
+            font-size: 1.05rem;
+            color: var(--primary-color);
+        }
+
+        .webflasher-step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.65rem;
+            height: 1.65rem;
+            border-radius: 50%;
+            background: var(--accent-gradient-soft);
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-right: 0.35rem;
+            vertical-align: middle;
+        }
+
+        .webflasher-btn {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            background: var(--accent-gradient);
+            color: #0d1117;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            min-height: 48px;
+            transition: transform 0.15s, filter 0.15s;
+        }
+
+        .webflasher-btn:hover:not(:disabled) {
+            filter: brightness(1.06);
+            transform: scale(1.02);
+        }
+
+        .webflasher-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .webflasher-status {
+            margin-top: 0.65rem;
+            font-size: 0.88rem;
+            color: var(--text-light);
+            line-height: 1.45;
+        }
+
+        .webflasher-field {
+            margin-top: 0.65rem;
+        }
+
+        .webflasher-field label {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--text-light);
+            margin-bottom: 0.35rem;
+        }
+
+        .webflasher-select,
+        .webflasher-file {
+            width: 100%;
+            max-width: 100%;
+            padding: 0.55rem 0.65rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .webflasher-source {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-top: 0.5rem;
+        }
+
+        .webflasher-source label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .webflasher-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.55rem;
+            margin-top: 0.75rem;
+            font-size: 0.88rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .webflasher-check input {
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .webflasher-progress {
+            margin-top: 1.25rem;
+            background: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            height: 1.35rem;
+            position: relative;
+        }
+
+        .webflasher-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-gradient);
+            transition: width 0.2s ease-out;
+        }
+
+        .webflasher-progress-label {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0d1117;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        #webflasher-log {
+            margin-top: 1rem;
+            background: #0a0e14;
+            color: #c8d0da;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 0.85rem 1rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.78rem;
+            line-height: 1.45;
+            max-height: 220px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        #webflasher-log .webflasher-log--err {
+            color: #f87171;
+        }
+
+        #webflasher-log .webflasher-log--ok {
+            color: var(--success-color);
+        }
+
+        #webflasher-log .webflasher-log--raw {
+            opacity: 0.85;
+        }
     </style>
 </head>
 <body>
@@ -991,6 +1192,7 @@
                 <li><a href="#boards">Development Boards</a></li>
                 <li><a href="#apps">App Download</a></li>
                 <li><a href="#firmware">Firmware Downloads</a></li>
+                <li><a href="#web-flasher">Web Flasher</a></li>
                 <li><a href="#flashing">Flashing Instructions</a></li>
                 <li><a href="#notes">Notes</a></li>
                 <li><a href="#troubleshooting">Troubleshooting</a></li>
@@ -1171,6 +1373,55 @@
                     </tbody>
                 </table>
             </div>
+        </section>
+
+        <section id="web-flasher">
+            <h2>⚡ Web Flasher</h2>
+            <p>Flash supported ESP32-S3 boards from the browser—similar to <a href="https://flasher.meshtastic.org/" class="table-link" target="_blank" rel="noopener noreferrer">Meshtastic Web Flasher</a>—using the Web Serial API and <a href="https://github.com/espressif/esptool-js" class="table-link" target="_blank" rel="noopener noreferrer">esptool-js</a>. Use a <strong>data-capable</strong> USB cable and a Chromium-based desktop browser (Chrome or Edge).</p>
+
+            <div id="webflasher-banner" class="webflasher-banner" hidden></div>
+
+            <div class="webflasher-grid">
+                <div class="webflasher-step">
+                    <h3><span class="webflasher-step-num" aria-hidden="true">1</span> USB device</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">Plug in your board. Put it in <strong>download mode</strong> when you flash (hold <strong>USER/BOOT</strong>, tap <strong>RST</strong>, release <strong>USER/BOOT</strong> on Tracker V1.2; other boards often auto-enter when flashing starts).</p>
+                    <button type="button" class="webflasher-btn" id="webflasher-port">Choose USB serial port</button>
+                    <p class="webflasher-status" id="webflasher-port-status">No port selected yet.</p>
+                </div>
+
+                <div class="webflasher-step">
+                    <h3><span class="webflasher-step-num" aria-hidden="true">2</span> Firmware</h3>
+                    <div class="webflasher-source">
+                        <label><input type="radio" name="webflasher-source" value="preset" checked> Board preset (from this site)</label>
+                        <label><input type="radio" name="webflasher-source" value="upload"> Upload a <code>.bin</code> file</label>
+                    </div>
+                    <div class="webflasher-field" id="webflasher-preset-row">
+                        <label for="webflasher-preset">Board / image</label>
+                        <select id="webflasher-preset" class="webflasher-select"></select>
+                    </div>
+                    <div class="webflasher-field" id="webflasher-file-row" hidden>
+                        <label for="webflasher-file">Firmware file</label>
+                        <input type="file" id="webflasher-file" class="webflasher-file" accept=".bin">
+                    </div>
+                </div>
+
+                <div class="webflasher-step">
+                    <h3><span class="webflasher-step-num" aria-hidden="true">3</span> Flash</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">Flashes at <code>0x0</code> with DIO mode to match the ESP Flash Download Tool settings on this page. Compressed transfer is enabled.</p>
+                    <label class="webflasher-check">
+                        <input type="checkbox" id="webflasher-erase">
+                        <span><strong>Erase full flash</strong> before writing (clean install; wipes existing data on the chip).</span>
+                    </label>
+                    <button type="button" class="webflasher-btn" id="webflasher-flash">Flash now</button>
+                </div>
+            </div>
+
+            <div class="webflasher-progress" aria-hidden="false">
+                <div class="webflasher-progress-fill" id="webflasher-progress-fill"></div>
+                <span class="webflasher-progress-label" id="webflasher-progress-label">0%</span>
+            </div>
+            <div id="webflasher-log" role="log" aria-live="polite"></div>
+            <p style="margin-top: 1rem; font-size: 0.88rem; color: var(--text-light);">If something fails, use the manual <a href="#flashing" class="table-link">Flashing Instructions</a> with the Espressif Flash Download Tool. You can click <strong>Choose USB serial port</strong> again to clear the previous selection.</p>
         </section>
 
         <section id="flashing">
@@ -1396,5 +1647,6 @@
             });
         })();
     </script>
+    <script type="module" src="web-flasher.js"></script>
 </body>
 </html>
